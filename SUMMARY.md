@@ -26,7 +26,7 @@ These files contain detailed roadmaps on specific topics:
 + [Registers](./notes/01_computer_architecture/02_registers.md)
     + [General Purpose Registers](./notes/01_computer_architecture/03_general_purpose_registers.md)
     + [Segment Registers](./notes/01_computer_architecture/04_segment_registers.md)
-+ [Pointer Registers](./notes/01_computer_architecture/05_pointer_registers.md)
+    + [Pointer Registers](./notes/01_computer_architecture/05_pointer_registers.md)
     + [Flag Register](./notes/01_computer_architecture/06_flag_register.md)
     + [Control Registers](./notes/01_computer_architecture/07_control_registers.md)
 + [Number Systems](./notes/01_computer_architecture/08_number_systems.md)
