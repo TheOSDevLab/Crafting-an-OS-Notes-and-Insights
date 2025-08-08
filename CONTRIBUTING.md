@@ -1,21 +1,23 @@
 # Contributing Guidelines
 
-Thanks for your interest in this project!
+Thank you for your interest in this project.
 
-This is a **personal OS development notes repo**, built as I learn. I want to keep the content consistent with my own learning path and writing style. That means:
+This repository serves as a **personal collection of notes on operating system development**, compiled as part of my ongoing learning process. The content is intentionally aligned with my individual learning path and writing style. To maintain consistency, please observe the following guidelines:
 
-## What You Can Do
+## Permitted Contributions
 
-- **Report mistakes**: Typos, broken links, incorrect explanations, factual errors, all are fair game. Please open an issue or PR with the fix or report.
-- **Make suggestions**: If there's a topic you'd like me to cover in the future, feel free to open an issue and suggest it.
++ **Reporting errors**: Typographical mistakes, broken links, inaccuracies in explanations, or factual errors are all welcome to be reported. Please open an issue for such matters.  
++ **Providing suggestions**: If there is a topic you would like to see covered in the future, you are welcome to open an issue and propose it.
 
-## What You Can't Do
+## Restricted Contributions
 
-- Please **do not add new notes**, sections, or files yourself. I will only include topics I’ve already learned and documented myself.
-- No unsolicited PRs that introduce new content; they'll be closed.
++ Please **do not add new notes, sections, or files** directly. Only topics that I have personally studied and documented will be included.  
++ Unsolicited pull requests introducing new content will be closed without review.
 
-## Why This Restriction?
+## Rationale for These Restrictions
 
-I want this to reflect my personal journey in learning OS development, written in my voice and pace. Think of this as my living notebook, just one that I'm sharing publicly.
+This project is intended to document my personal journey in learning operating system development, expressed in my own words and at my own pace. It should be regarded as a living notebook that I have chosen to make publicly accessible.
 
-Thanks for understanding!
+Thank you for your understanding.
+
+---
