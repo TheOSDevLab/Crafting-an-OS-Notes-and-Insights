@@ -2,7 +2,7 @@
 
 > **Random Quote:** It doesn't matter how long the path is; if you can see the next step, take it.
 
-Welcome to the Operating System Development Roadmap. This guide is intended to help you progress from a complete beginner to someone capable of writing a basic kernel. It begins with foundational topics such as understanding how a CPU works, leaning Assembly and C, and gradually leads to building your own bootloader and kernel that can run directly on bare metal.
+Welcome to the Operating System Development Roadmap. This guide is intended to help you progress from a complete beginner to someone capable of writing a basic kernel. It begins with foundational topics such as understanding how a CPU works, learning Assembly and C, and gradually leads to building your own bootloader and kernel that can run directly on bare metal.
 
 No prior experience in systems programming is necessary; only curiosity, patience, and a willingness to work closely with low-level code.
 
