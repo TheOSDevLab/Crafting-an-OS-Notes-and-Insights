@@ -4,16 +4,23 @@
 
 ## Boot
 
-Covered here: [boot](../notes/03_bootloader_development/01_boot.md)
+Covered here: [Boot](../notes/03_bootloader_development/01_boot.md)
 
 + Boot sequence.
 + Boot sector and bootloader size.
 + Boot signature.
 + Where the BIOS loads the bootloader in memory.
 
-## Memory
+---
 
-+ Memory layout in Real Mode
+## Memory Layout
+
+Covered here: [Memory Layout](../notes/03_bootloader_development/02_memory_layout.md)
+
++ Memory layout in Real Mode.
++ Key memory regions.
+
+---
 
 ## Stack
 
