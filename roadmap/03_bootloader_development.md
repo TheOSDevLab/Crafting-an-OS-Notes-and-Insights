@@ -24,4 +24,10 @@ Covered here: [Memory Layout](../notes/03_bootloader_development/02_memory_layou
 
 ## Stack
 
+Covered here: [Stack](../notes/03_bootloader_development/03_stack.md)
+
++ What the stack is.
++ What it is used for.
++ How to set up a stack properly.
+
 ---
