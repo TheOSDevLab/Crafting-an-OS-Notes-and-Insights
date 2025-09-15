@@ -4,6 +4,8 @@
 
 ## Boot
 
+Covered here: [boot](../notes/03_bootloader_development/01_boot.md)
+
 + Boot sequence.
 + Boot sector and bootloader size.
 + Boot signature.
