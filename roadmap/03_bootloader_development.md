@@ -31,3 +31,19 @@ Covered here: [Stack](../notes/03_bootloader_development/03_stack.md)
 + How to set up a stack properly.
 
 ---
+
+## Hello World Project
+
+Covered here: [Hello World Project](../projects/bootloader/01_hello_world/README.md)
+
++ Write a basic bootloader that:
+
+    - Initialize the stack in a secure memory region.  
+    - Use BIOS interrupts to display the message "Hello World!".  
+    - Ensure the program size is exactly 512 bytes.  
+    - Include the standard boot signature.  
+    - Specify to the assembler the memory address where the bootloader will be loaded.  
+
+**Note**: The assembly concepts required for this task were explained in the previous section of the roadmap. If you are not familiar with these concepts, please review [this roadmap](./02_assembly.md).
+
+---
