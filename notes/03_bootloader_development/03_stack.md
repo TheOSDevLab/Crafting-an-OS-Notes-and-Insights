@@ -6,6 +6,7 @@
 + [Uses in Bootloader Development](#uses-in-bootloader-development)
 + [Common Pitfalls](#common-pitfalls)
 + [How to Position and Initialize the Stack Appropriately](#how-to-position-and-initialize-the-stack-appropriately)
++ [Common Real Mode Stack Locations](#common-real-mode-stack-locations)
 + [Additional Relevant Information](#additional-relevant-information)
 + [Sample Initialization Pattern](#sample-initialization-pattern)
 
@@ -75,6 +76,29 @@ Without a correctly set up stack, calls/interrupts stack frames may overwrite wr
    If you know your code will push many items, you might leave a few unused bytes just below your specified stack bottom, or detect when SP goes too low (this can be via software, not automatic in real mode).
 6. **Document & maintain segment\:offset assumptions**
    If you assume specific values for SS, segments, etc., make sure that all parts of your code honor that. Changing DS, ES, etc., may affect addressing of data on stack.
+
+---
+
+## Common Real Mode Stack Locations
+### BIOS Default Stack (near 0x400)
+
+* **Why**: By default, the BIOS initializes the stack pointer within the memory area immediately above the BIOS Data Area, typically around 0x400. This allows early boot processes to function without requiring explicit stack configuration by the bootloader.
+* **Risk**: The stack is located adjacent to critical system structures such as the Interrupt Vector Table (0x0000-0x03FF) and the BIOS Data Area. As a result, stack growth in this region may corrupt these structures, leading to instability or system crashes.
+
+### 0x7C00 Region
+
+* **Why**: This location coincides with the memory address at which the BIOS loads the boot sector. Some developers initialize the stack pointer near this region for simplicity.
+* **Risk**: The stack may overwrite BIOS data structures or reserved memory areas if its growth is not carefully controlled. Nevertheless, this approach is generally considered safer than relying on the default BIOS stack location.
+
+### 0x7000 Region
+
+* **Why**: This region is situated safely above the Interrupt Vector Table (0x0000-0x03FF) and the BIOS Data Area, while remaining below the bootloader code at 0x7C00. It provides a practical balance between safety and available memory.
+* **Risk**: If the stack grows excessively, it may still extend into the bootloader code or reserved BIOS regions. This can be considered less safe than 0x7C00 because it has a shorter distance before colliding with critical BIOS data structures.
+
+### Top of Conventional Memory (0x9FC00-0xA0000)
+
+* **Why**: Initializing the stack near the upper boundary of conventional memory, just below the Extended BIOS Data Area (EBDA), maximizes available lower memory for the bootloader and associated data structures.
+* **Risk**: This placement assumes a predictable EBDA location. On systems with different BIOS configurations, overlap with the EBDA or other reserved areas is possible.
 
 ---
 
