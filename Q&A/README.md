@@ -8,4 +8,6 @@ This directory collects all the small but important questions that come up while
 
 ## Links
 
-1. [How can I calculate memory sizes given hexadecimal representations?](01_memory_size_calculation.md)
+**No questions yet. You are encouraged to open an issue should you have any inquiries.**
+
+---
