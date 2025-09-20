@@ -50,3 +50,5 @@ Or check the full [Table of Contents](SUMMARY.md)!
 ## License
 
 This project is licensed under the MIT License.
+
+---
