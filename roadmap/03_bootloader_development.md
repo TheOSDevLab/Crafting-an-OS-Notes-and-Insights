@@ -66,3 +66,21 @@ Covered here: [Hello World Project](../projects/bootloader/01_hello_world/README
 **Note**: The assembly concepts required for this task were explained in the previous section of the roadmap. If you are not familiar with these concepts, please review [this roadmap](./02_assembly.md).
 
 ---
+
+## 6. Second Stage Bootloader
+
+Covered here:
+    - [Second stage bootloader introduction](../notes/03_bootloader_development/06_second_stage_bootloader/README.md)
+    - [CHS addressing](../notes/03_bootloader_development/06_second_stage_bootloader/chs.md)
+    - [LBA addressing](../notes/03_bootloader_development/06_second_stage_bootloader/lba.md)
+    - [BIOS INT 13h](#)
+    - [`dd` command basics](#)
+
++ Functions of the second stage bootloader. 
++ CHS addressing.
++ LBA addressing.
++ BIOS INT 13h.
++ Learn about failures and how to retry.
++ Basics of the `dd` command.
+
+---
