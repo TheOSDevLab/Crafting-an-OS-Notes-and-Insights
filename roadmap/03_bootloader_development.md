@@ -74,6 +74,11 @@ Covered here: [Hello World Project](../projects/bootloader/01_hello_world/README
 + [LBA addressing](../notes/03_bootloader_development/06_second_stage_bootloader/lba.md)
 + [Basics of the `dd` command.](../notes/command_line_tools/dd/README.md)
 + [BIOS INT 13h introduction](https://github.com/TheOSDevLab/Bare-Metal-Assembly/tree/main/notes/05_bios_interrupts/int13h)
-+ [Read sectors using CHS addressing (BIOS INT 13h AH=02h)]()
++ [Read sectors using CHS addressing (BIOS INT 13h AH=02h)](https://github.com/TheOSDevLab/Bare-Metal-Assembly/blob/main/notes/05_bios_interrupts/int13h/02h.md)
++ [Read sectors using LBA addressing (BIOS INT 13H AH=42h)](https://github.com/TheOSDevLab/Bare-Metal-Assembly/blob/main/notes/05_bios_interrupts/int13h/42h.md)
 
 ---
+
+## Second Stage Bootloader Project
+
+
