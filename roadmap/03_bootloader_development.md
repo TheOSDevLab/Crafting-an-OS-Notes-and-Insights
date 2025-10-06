@@ -76,7 +76,7 @@ Covered here: [Hello World Project](../projects/bootloader/01_hello_world/README
 + [BIOS INT 13h introduction](https://github.com/TheOSDevLab/Bare-Metal-Assembly/tree/main/notes/05_bios_interrupts/int13h)
 + [Read sectors using CHS addressing (BIOS INT 13h AH=02h)](https://github.com/TheOSDevLab/Bare-Metal-Assembly/blob/main/notes/05_bios_interrupts/int13h/02h.md)
 + [Read sectors using LBA addressing (BIOS INT 13H AH=42h)](https://github.com/TheOSDevLab/Bare-Metal-Assembly/blob/main/notes/05_bios_interrupts/int13h/42h.md)
-+ [QEMU basics](#)
++ [QEMU basics](../notes/command_line_tools/qemu/introduction.md)
 
 ---
 
