@@ -1,22 +1,44 @@
 org 0x10000
 bits 16
 
-; Print the first message.
-lea si, [first_msg]
-call print_string
-jmp second_print
+; `second_stage.bin` memory layout.
+; First_sector: 0x0000 - 0x01FF (512 bytes)
+; Zeroes pad  : 0x0200 - 0xFDFF (63 kilobytes)
+; Last sector : 0xFE00 - 0xFFFF (512 bytes)
 
-; Fill the first 127 sectors with 0s.
-times (512 * 127) - ($ - $$) db 0
+; Segments and stack setup.
+xor ax, ax
+mov es, ax
+mov ss, ax
+mov sp, 0x7C00
+mov ax, 0x1000
+mov ds, ax
 
-; Print the second message.
-second_print:
-    lea si, [second_msg]
+first_sector_print:
+    call print_line
+    lea si, [first_sector_message]
     call print_string
 
-cli
-hlt
+    jmp last_sector_print
 
+times (512 * 127) - ($ - $$) db 0
+
+last_sector_print:
+    call print_line
+    lea si, [last_sector_message]
+    call print_string
+
+    jmp done
+
+done:
+    cli
+    hlt
+
+;; VARIABLES
+first_sector_message  db "Hello from first sector.", 0
+last_sector_message   db "Hello from last sector.", 0
+
+;; FUNCTIONS
 ; -----------------------------------------------------
 ; Print the given string.
 ; Input: SI = Starting address of the string to print.
@@ -42,8 +64,17 @@ print_char:
     int 0x10
     ret
 
-; DATA.
-first_msg  db "Hello from first sector of second stage bootloader.", 0
-second_msg db "Hello from last sector of second stage bootloader.", 0
+; --------------------------------------------------------
+; Print a new line (i.e move the cursor to the next line).
+; Input: NONE
+; --------------------------------------------------------
+print_line:
+    mov ah, 0x0E
+    mov al, 0x0D    ; Carriage return.
+    int 0x10
+
+    mov al, 0x0A    ; Line feed.
+    int 0x10
+    ret
 
 times (512 * 128) - ($ - $$) db 0

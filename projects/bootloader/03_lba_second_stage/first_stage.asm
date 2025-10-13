@@ -1,12 +1,11 @@
 org 0x7C00
 bits 16
 
-; Constants.
-SECTOR_COUNT equ 16         ; Number of sectors to read at a time.
-SEGMENT_ADDRESS equ 0x1000  ; Destination memory segment.
-OFFSET_ADDRESS  equ 0x0000  ; Destination memory offset.
+SECTOR_COUNT equ 64     ; Sectors read per loop iteration.
+MEM_SEGMENT equ 0x1000  ; Memory destination segment.
+MEM_OFFSET  equ 0x0000  ; Memory destination offset.
 
-; Segment and stack setup.
+; Segments and stack setup.
 xor ax, ax
 mov ds, ax
 mov es, ax
@@ -14,46 +13,57 @@ mov ss, ax
 mov sp, 0x7C00
 
 ; Set video mode and clear the screen.
-mov ax, 0x0003  ; 80x25 color text mode.
+mov ax, 0x0003
 int 0x10
 
-; Print message.
+; Load second stage.
 lea si, [loading_msg]
 call print_string
 
-; Load the second stage (128KB).
-mov ax, SEGMENT_ADDRESS
-mov es, ax         ; Destination segment
+mov dl, 0x80        ; Drive.
 lea si, [DAP]
 
-.load_loop:
-    mov word [DAP + 6], es              ; Segment.
-
-    mov ah, 0x42
-    mov dl, 0x80
-    int 0x13
+mov cx, (128 / SECTOR_COUNT)
+load_loop:
+    mov ah, 0x42    ; BIOS Function: Read LBA.
+    int 0x13        ; Call BIOS.
     jc disk_error
 
-    ; Update segment position for next chunk.
-    mov ax, es
-    add ax, (512 * SECTOR_COUNT) / 16
-    mov es, ax
+    ; Update DAP.
+    add word [DAP_Segment], ((512 * SECTOR_COUNT) / 16)
 
-    add dword [LBA], SECTOR_COUNT   ; Advance LBA.
+    mov bx, [DAP_LBA]
+    add bx, SECTOR_COUNT
+    mov [DAP_LBA], bx
 
-    cmp dword [LBA], 128       ; Stop after 256 sectors (128KB)
-    jl .load_loop
+    loop load_loop
 
-; jmp SEGMENT_ADDRESS:OFFSET_ADDRESS             ; Jump to loaded kernel
-jmp 0x1000:0x0000
+jmp MEM_SEGMENT:MEM_OFFSET
 
-; Handle disk errors.
 disk_error:
-    lea si, [error]
+    lea si, [error_msg]
     call print_string
+
+done:
     cli
     hlt
 
+;; VARIABLES
+loading_msg db "Loading second stage.", 0
+error_msg   db "Read ERROR!!!", 0
+
+DAP:
+    db 0x10     ; Packet size.
+    db 0        ; Reserved.
+    dw SECTOR_COUNT
+    dw MEM_OFFSET
+DAP_Segment:
+    dw MEM_SEGMENT
+DAP_LBA:
+    dd 1        ; Starting LBA.
+    dd 0
+
+;; FUNCTIONS
 ; -----------------------------------------------------
 ; Print the given string.
 ; Input: SI = Starting address of the string to print.
@@ -78,18 +88,6 @@ print_char:
     mov bh, 0
     int 0x10
     ret
-
-; DATA.
-loading_msg db "Loading second stage bootloader.", 0
-error db "An error occurred."
-
-DAP:
-    db 0x10, 0
-    dw SECTOR_COUNT     ; Sectors to read
-    dw OFFSET_ADDRESS   ; Offset
-    dw 0                ; Segment (updated in code)
-LBA dd 1                ; Starting LBA
-    dd 0
 
 times 510 - ($ - $$) db 0
 dw 0xAA55
