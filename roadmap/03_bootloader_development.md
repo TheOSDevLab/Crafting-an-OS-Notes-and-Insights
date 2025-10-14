@@ -107,11 +107,24 @@ Covered [here](../projects/bootloader/02_chs_second_stage/README.md)
 
 ## LBA Second Stage Project
 
-+ First stage will load the second stage using LBA addressing.
-+ The second stage should be 128 KB in size.
-+ In the first sector of the second stage, print something.
-+ Pad with zeros until the last sector.
-+ In the last sector of the second stage, print something different.
-+ Load the second stage at `0x1000:0x0000`.
+Covered [here](../projects/bootloader/03_lba_second_stage/README.md)
+
+1. **First Stage Bootloader:**
+
+   - Use BIOS interrupt `INT 13h AH=42h` (Extended Read Sectors) to load the second stage using LBA addressing.
+   - Load the full 64 KB second stage into memory at segment `0x1000`, offset `0x0000`.
+   - Transfer execution to the second stage via a far jump.
+
+2. **Second Stage Bootloader:**
+
+   - The binary must be structured as a 64 KB image.
+   - Execute code from the first sector to print an initial message.
+   - Pad the binary to exactly 64 KB such that the second to the second last sectors are 0s.
+   - Execute code from the last sector to print a different message.
+
+3. **Disk Image Assembly:**
+
+   - Ensure the first stage's LBA call correctly locates the second stage on disk.
+   - For simplicity, load the second stage from the second sector of the disk (LBA=1)
 
 ---
