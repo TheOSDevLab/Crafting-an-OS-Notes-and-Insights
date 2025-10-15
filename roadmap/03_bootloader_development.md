@@ -128,3 +128,13 @@ Covered [here](../projects/bootloader/03_lba_second_stage/README.md)
    - For simplicity, load the second stage from the second sector of the disk (LBA=1)
 
 ---
+
+## 7. A20 Line
+
+Covered [here](../notes/03_bootloader_development/07_a20_line/README.md).
+
++ The purpose of the A20 line and its historical context.
++ Methods for enabling A20 (keyboard controller method, BIOS functions, and fast A20 gate).
++ Testing whether A20 has been successfully enabled.
+
+---
