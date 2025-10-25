@@ -8,6 +8,6 @@ This directory collects all the small but important questions that come up while
 
 ## Links
 
-**No questions yet. You are encouraged to open an issue should you have any inquiries.**
+1. [How can a function return a value in assembly?](./01_assembly_function_return.md)
 
 ---
