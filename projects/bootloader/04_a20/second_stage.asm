@@ -1,4 +1,3 @@
-; TODO: Add keyboard controller method for when both BIOS and Fast A20 fail.
 org 0x7E00
 bits 16
 
@@ -34,6 +33,8 @@ fast_a20_enable:
     cmp al, 1
     je a20_enabled
     jmp a20_disabled
+
+; TODO: Add keyboard controller method incase both BIOS and Fast A20 fail.
 
 a20_enabled:
     lea si, [a20_enabled_msg]
@@ -106,6 +107,8 @@ print_line:
 ;   2: Disabled
 ; ---------------------------------------------------------------
 test_a20:
+    ; TODO: Test multiple times to compensate for the BIOSes that may take
+    ; a bit longer to propagate the gate bit.
     call bios_test_a20
     cmp al, 2
     jb .test_return
