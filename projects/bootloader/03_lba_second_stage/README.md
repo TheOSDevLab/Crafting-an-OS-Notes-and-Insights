@@ -57,6 +57,16 @@ This project implements a two-stage bootloader system where the first stage uses
 
 ## Running the Project
 
+Execute the provided build script to assemble the bootloaders and launch the emulator:
+
+```bash
+chmod +x run.sh
+./run.sh
+
+# Alternative if execute permissions are unavailable:
+bash run.sh
+```
+
 The script performs the following automated steps:
 
 1. **Assembly:** Compiles `first_stage.asm` and `second_stage.asm` into raw binaries using NASM (`first_stage.bin` and `second_stage.bin`)
