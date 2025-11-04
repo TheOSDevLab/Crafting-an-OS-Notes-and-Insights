@@ -46,3 +46,14 @@ This file covers the structure of the GDT in detail.
 [GDT_descriptor_structure.md]
 
 This file covers the structure of the GDT descriptor in detail.
+
+---
+
+## Switching to Protected Mode
+
+[process.md](./process.md)
+
++ This file contains the full process of switching to protected mode.
++ It includes an assembly snippet implementing the steps discussed.
+
+---
