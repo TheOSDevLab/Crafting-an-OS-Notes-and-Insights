@@ -220,31 +220,37 @@ Covered [here](../projects/bootloader/05_protected_mode/README.md)
         - Define a GDT descriptor structure that holds:
           - The GDT’s **limit** (size - 1).
           - The GDT’s **base address** (linear address of the GDT).
+
      2. **Load the GDT**
         - Use the `LGDT` instruction to load the address of the GDT descriptor into the **GDTR** register.
+
      3. **Enable Protected Mode**
         - Read the **CR0** register into a general-purpose register (e.g., `EAX`).
         - Set the **Protection Enable (PE)** bit (bit 0) in `CR0`.
         - Write the value back to `CR0`.
+
      4. **Perform a Far Jump**
         - Execute a **far jump** to flush the prefetch queue and load the **CS** register with the protected-mode code segment selector.
         - This jump transfers control to the protected-mode entry label.
+
      5. **Initialize Segment Registers**
         - Load **DS**, **ES**, **FS**, **GS**, and **SS** with the data segment selector from the GDT.
         - Optionally, initialize a 32-bit stack pointer (`ESP`) for safe stack operations.
+
      6. **Halt Execution**
         - Once the processor is operating in protected mode and all segment registers are set, halt the CPU using:
           ```asm
           cli
           hlt
           ```
-  - Print something to test if the switch was successful.
 
-3. **Project Goals:**
+   - **Testing the Switch:**
+     - After building and running the bootloader in QEMU, open the **QEMU Monitor** (using `Ctrl + Alt + 2` or `-monitor stdio`).
+     - At the monitor prompt, run:
+       ```
+       info registers
+       ```
+     - Check the **CR0** register. If the least significant bit (bit 0) is set to **1**, the processor is now in **Protected Mode**.
+     - You can then return to the guest console using `Ctrl + Alt + 1`.
 
-   - Successfully transition from Real Mode to 32-bit Protected Mode.
-   - Verify that:
-     - The **GDT** is correctly defined and loaded.
-     - The **PE bit** in **CR0** is set.
-     - The **far jump** executes correctly and reaches protected-mode code.
-   - Leave the CPU halted safely in protected mode.
+---
