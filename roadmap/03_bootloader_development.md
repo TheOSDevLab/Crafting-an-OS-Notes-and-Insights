@@ -138,3 +138,60 @@ Covered [here](../notes/03_bootloader_development/07_a20_line/README.md).
 + Testing whether A20 has been successfully enabled.
 
 ---
+
+## A20 Line Project
+
+## A20 Enablement Second Stage Project
+
+Covered [here](../projects/bootloader/04_a20/README.md)
+
+1. **First Stage Bootloader:**
+
+   - Use BIOS interrupt `INT 13h AH=42h` (Extended Read Sectors) to load the second stage using LBA addressing.
+   - Load the second stage into memory at segment `0x0000`, offset `0x7E00`.
+   - Transfer execution to the second stage via a far jump to `0x0000:0x7E00`.
+
+2. **Second Stage Bootloader:**
+
+   - Implement a comprehensive A20 enablement routine attempting multiple methods in sequence:
+     - BIOS INT 15h AH=2401h method
+     - System Control Port A (Fast A20) method
+     - Keyboard Controller method (optional)
+   - After each enablement attempt, verify A20 status.
+   - Display clear status messages indicating:
+     - Which enablement method succeeded
+     - Verification results
+     - Any errors encountered
+   - Upon successful A20 enablement, display a confirmation message and halt.
+
+3. **Verification System:**
+
+   - Implement robust A20 verification using multiple memory location pairs.
+   - Include both BIOS query (INT 15h AH=2402h) and manual memory wrap-around tests.
+   - Add retry logic with delays between verification attempts to ensure reliability (optional).
+
+4. **Error Handling:**
+
+   - Gracefully handle failures in any single enablement method.
+   - Continue attempting alternative methods if previous ones fail.
+   - Display appropriate error messages for diagnostic purposes.
+   - Implement a final fallback strategy if all methods fail.
+
+---
+
+## 8. Switch to Protected Mode
+
+Covered [here](../notes/03_bootloader_development/08_protected_mode/README.md)
+
++ Introduction to protected mode.
++ Segment models: flag model vs segmented model.
++ GDT:
+    - Purpose and structure of the Global Descriptor Table (GDT)
+    - GDT format and segment descriptors.
++ `LGDT` assembly instruction.
++ Transition to protected mode:
+    - PE (Protection Enable) bit in CR0.
+    - Common pitfalls.
+    - Loss of BIOS interrupts.
+
+---
