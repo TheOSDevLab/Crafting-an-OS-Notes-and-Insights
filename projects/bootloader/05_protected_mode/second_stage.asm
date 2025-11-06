@@ -52,17 +52,40 @@ gdt_descriptor:
 ; ========== Protected Mode Code ==========
 bits 32
 protected_mode_entry:
+	; Setup segment registers.
 	mov ax, 0x10
 	mov ds, ax
 	mov es, ax
 	mov gs, ax
 	mov ss, ax
 
-	jmp done
+	; Clear the screen.
+	mov edi, 0xB8000	; VGA text buffer.
+	mov ecx, (80 * 25)	; Counter.
+	mov eax, 0x0720		; 0x20 = ' ', 0x07 = light gray on black.
+	rep stosw
+
+	; Print a message.
+	lea esi, [success_msg]
+	mov edi, 0xB8000
+	mov ah, 0x07 		; Attribute: light gray on black.
+
+	.print_loop:
+		lodsb
+		cmp al, 0
+		jz done
+
+		mov [edi], al		; Write character.
+		mov [edi + 1], ah	; Write attribute.
+		add edi, 2 			; Advance pointer.
+
+		jmp .print_loop
 
 done:
 	hlt
 	jmp done
 
+;; VARIABLES.
+success_msg db "Switched to protected mode successfully.", 0
 
 times 512 - ($ - $$) db 0
