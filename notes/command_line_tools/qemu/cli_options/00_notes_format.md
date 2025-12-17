@@ -20,7 +20,8 @@ qemu-system-<arch> -cpu <model>[,feature1[,feature2[,...]]]
 
 For each parameter:
 
-  * **Name**
+* **Name**
+  Explain what the parameter means.
   * **Type** (string, integer, boolean, enumeration, etc.)
   * **Default value** (if applicable)
   * **Valid values / constraints**
